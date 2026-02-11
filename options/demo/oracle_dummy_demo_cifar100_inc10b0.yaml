@@ -1,0 +1,91 @@
+dataset: cifar100
+data_path: ./store/dataset
+order:
+  - [87, 0, 52, 58, 44, 91, 68, 97, 51, 15, 94, 92, 10, 72, 49, 78, 61, 14, 8, 86, 84, 96, 18, 24, 32, 45, 88, 11, 4, 67, 69, 66, 77, 47, 79, 93, 29, 50, 57, 83, 17, 81, 41, 12, 37, 59, 25, 20, 80, 73, 1, 28, 6, 46, 62, 82, 53, 9, 31, 75, 38, 63, 33, 74, 27, 22, 36, 3, 16, 21, 60, 19, 70, 90, 89, 43, 5, 42, 65, 76, 40, 30, 23, 85, 2, 95, 56, 48, 71, 64, 98, 13, 99, 7, 34, 55, 54, 26, 35, 39]
+
+seed: [1]
+
+initial_increment: 0
+increment: 10
+label: dummy_cifar100_inc10_test_demo
+
+model: oracle_dummy
+convnet: resnet18
+use_bias: False
+last_relu: False
+analyse: True
+
+lr: 0.1
+weight_decay: 0.0005
+dynamic_weight_decay: False
+scheduler: 'multistep'
+scheduling:
+  - 100
+  - 120
+lr_decay: 0.1
+optimizer: sgd
+epochs: 170
+#epochs: 120
+batch_size: 128
+keep_memory: True
+val_per_n_epoch: -1
+random_classes: False
+warmup: True
+warmup_epochs: 10
+
+# some options for the new method
+der: True
+use_aux_cls: True
+aux_n+1: True
+distillation: "none"
+temperature: 2
+
+reuse_oldfc: False
+weight_normalization: False
+loss_type: ce
+
+# the memory options
+coreset_strategy: "iCaRL"
+mem_size_mode: uniform_fixed_total_mem
+memory_size: 500
+fixed_memory_per_cls: 5
+
+initial_training_config:
+  lr: 0.1
+  weight_decay: 0.0005
+  scheduling:
+    - 100
+    - 120
+  lr_decay: 0.1
+  optimizer: sgd
+  epochs: 170
+
+postprocessor:
+  enable: False
+  type: 'bic' #'bic', 'wa'
+  epochs: 1
+  batch_size: 128
+  lr: 0.1
+  scheduling:
+    - 40
+    - 60
+  lr_decay_factor: 0.1
+  weight_decay: 0.0005
+
+decouple:
+  enable: False
+  epochs: 30
+  lr: 0.1
+  scheduling:
+    - 15
+  lr_decay: 0.1
+  weight_decay: 0.0005
+  temperature: 1.0
+  reuse_old: False
+  o2n_fix: False
+  refresh_param: True
+  loader_type: balanced
+  logit_ctrl: False
+
+
+

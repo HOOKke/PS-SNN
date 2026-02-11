@@ -1,0 +1,130 @@
+dataset: imagenet100
+
+model: spiking_mutable
+convnet: spiking_resnet18
+train_head: "softmax"  # -> however this parameter doesn't have any use for now
+infer_head: "softmax"
+use_bias: False
+last_relu: False
+
+epochs: 240
+batch_size: 64
+workers: 16
+weight_decay: 0.0005  # -> may be an important part (and initial)
+scheduler: 'multistep'
+lr: 0.1
+optimizer: sgd
+#epochs: 220
+#scheduler: cosine
+#lr: 0.0005
+#optimizer: adam
+
+dynamic_weight_decay: False
+scheduling:
+  - 60
+  - 80
+  - 120
+  - 170
+#  - 120
+#  - 160
+#  - 180
+lr_decay: 0.2  # 0.1
+keep_memory: True
+val_per_n_epoch: -1
+random_classes: False
+warmup: True
+warmup_epochs: 20
+
+# some options for the new method
+der: True
+aux_n+1: True
+distillation: "none"
+# -> I NEED TO USE TET LOSS REMEMBER
+spiking: True
+T: 6
+TET_config:
+  enable: True
+  TET_mean: 1.0
+#  TET_lamb: 0.001
+  TET_lamb: 0.
+
+reuse_oldfc: False
+weight_normalization: False
+
+conv_config:
+  spiking_neuron: zif-lif
+  surrogate_function: none
+
+temperature: 2.0
+use_aux: True
+supp_o2n: True  # -> important part
+step_kl: False  # -> important part
+recover_old: False
+kl_config: all_sample  # -> important part
+#kl_config: old_sample  # -> important part
+aug_config:
+  aug_st_ep: 200
+  main_enable: False  # -> important part
+  main_range: all_sample
+  main_part: latter_logit
+  main_minus: False
+  aux_enable: False  # -> important part
+  aux_range: all_sample
+  aux_part: latter_logit
+  aux_minus: False
+  aux_kl: none
+
+# the memory options
+coreset_strategy: "iCaRL"
+mem_size_mode: uniform_fixed_total_mem
+memory_size: 2000
+fixed_memory_per_cls: 200
+
+initial_training_config:
+  lr: 0.1
+  optimizer: sgd
+#  lr_decay: 0.1
+  lr_decay: 0.2
+#  lr: 0.0005
+#  optimizer: adam
+  weight_decay: 0.0005  # -> may be an important part
+  scheduling:
+    - 60
+    - 80
+    - 120
+    - 170
+#    - 120
+#    - 160
+#    - 180
+  epochs: 240
+
+decouple:
+  enable: True
+  epochs: 40
+  lr: 0.1
+  scheduling:
+    - 15
+  lr_decay: 0.1
+  weight_decay: 0.0005
+  temperature: 1.0
+  #  fullset: True
+  reuse_old: False
+  o2n_fix: False
+  refresh_param: True
+  loader_type: balanced
+  block_fix: none
+  logit_ctrl: True  # -> important part
+
+# MeanLess part
+postprocessor:
+  enable: False
+  type: 'bic' #'bic', 'wa'
+  epochs: 1
+  batch_size: 128
+  lr: 0.1
+  scheduling:
+    - 40
+    - 60
+  lr_decay_factor: 0.1
+  weight_decay: 0.0005
+#####################

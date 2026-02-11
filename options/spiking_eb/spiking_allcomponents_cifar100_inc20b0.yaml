@@ -1,0 +1,102 @@
+dataset: cifar100
+order:
+  - [87, 0, 52, 58, 44, 91, 68, 97, 51, 15, 94, 92, 10, 72, 49, 78, 61, 14, 8, 86, 84, 96, 18, 24, 32, 45, 88, 11, 4, 67, 69, 66, 77, 47, 79, 93, 29, 50, 57, 83, 17, 81, 41, 12, 37, 59, 25, 20, 80, 73, 1, 28, 6, 46, 62, 82, 53, 9, 31, 75, 38, 63, 33, 74, 27, 22, 36, 3, 16, 21, 60, 19, 70, 90, 89, 43, 5, 42, 65, 76, 40, 30, 23, 85, 2, 95, 56, 48, 71, 64, 98, 13, 99, 7, 34, 55, 54, 26, 35, 39]
+
+seed: [1]
+
+initial_increment: 0
+increment: 20
+label: spiking_allcomponents_cifar100_inc20
+
+model: spiking_mutable
+convnet: spiking_cifar_resnet
+train_head: "softmax"  # -> however this parameter doesn't have any use for now
+infer_head: "softmax"
+use_bias: False
+last_relu: False
+
+scheduler: 'multistep'
+epochs: 170
+batch_size: 64
+weight_decay: 0.0005  # -> may be an important part (and initial)
+lr: 0.1
+optimizer: sgd
+
+dynamic_weight_decay: False
+scheduling:
+  - 100
+  - 120
+lr_decay: 0.1
+keep_memory: True
+val_per_n_epoch: -1
+random_classes: False
+warmup: True
+warmup_epochs: 10
+
+# some options for the new method
+der: True
+aux_n+1: True
+distillation: "none"
+# -> I NEED TO USE TET LOSS REMEMBER
+spiking: True
+T: 4
+TET_config:
+  enable: False  # -> important part
+  TET_mean: 1.0
+  TET_lamb: 0.001
+#  TET_lamb: 0.
+
+reuse_oldfc: False
+weight_normalization: False
+
+conv_config:
+  spiking_neuron: zif-lif
+  surrogate_function: none
+
+temperature: 2.0
+use_aux: True
+supp_o2n: True  # -> important part
+step_kl: False  # -> important part
+recover_old: False
+kl_config: all_sample  # -> important part
+#kl_config: old_sample  # -> important part
+aug_config:
+  aug_st_ep: 130
+  main_enable: False  # -> important part
+  main_range: all_sample
+  main_part: latter_logit
+  main_minus: False
+  aux_enable: False  # -> important part
+  aux_range: all_sample
+  aux_part: latter_logit
+  aux_minus: False
+  aux_kl: none
+
+# the memory options
+coreset_strategy: "iCaRL"
+mem_size_mode: uniform_fixed_total_mem
+memory_size: 2000
+fixed_memory_per_cls: 200
+
+initial_training_config:
+  lr: 0.1
+  optimizer: sgd
+  weight_decay: 0.0005  # -> may be an important part
+  scheduling:
+    - 100
+    - 120
+  lr_decay: 0.1
+  epochs: 170
+
+decouple:
+  enable: True
+  epochs: 30
+  lr: 0.1
+  scheduling:
+    - 15
+  lr_decay: 0.1
+  weight_decay: 0.0005
+  temperature: 1.0  # 1.0 5.0
+  refresh_param: True
+  loader_type: balanced
+  logit_ctrl: True  # -> important part
