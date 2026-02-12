@@ -7,7 +7,7 @@ This repository contains code supporting the manuscript **“PS-SNN: Pattern Sep
 ## Data
 Our experiments relies on the natural image dataset CIFAR100(https://www.cs.toronto.edu/~kriz/cifar.html).
 
-# Running experiments
+## Running experiments
 
 First install the required package:
 ```bash
@@ -50,5 +50,5 @@ python main_exp.py --options options/data/imagenet100_1order.yaml options/spikin
 
 ```
 
-# Acknowledgement
+## Acknowledgement
 Thanks for the fine coding base from [https://github.com/arthurdouillard/incremental_learning.pytorch](https://github.com/arthurdouillard/incremental_learning.pytorch).
