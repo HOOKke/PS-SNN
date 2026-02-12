@@ -9,12 +9,13 @@ Our experiments relies on the natural image dataset CIFAR100(https://www.cs.toro
 
 ## Running experiments
 
-First install the required package:
+First, You can install the dependencies using the provided requirements.txt file.:
 ```bash
 pip install -r requirements.txt
 ```
 
-The code here main deploy this method on CIFAR100. With two benchmarks, including CIFAR100-B0-inc10 and CIFAR100-B50-inc10 and so on.
+
+To verify the effectiveness of our method, we conduct experiments on the natural image dataset CIFAR100 under several benchmark protocols. The first protocol, CIFAR100-B0, trains all 100 classes in specific splits over 5 steps (20 classes per step), 10 steps (10 classes per step) and 20 steps (5 classes per step) with a fixed memory size of 2000. The second protocol, CIFAR100-B50, begins with training on 50 classes, after which the remaining 50 classes are introduced incrementally in 5 step (10 classes per step) and 10 step (5 classes per step), with a fixed memory of 20 exemplars per class.
 
 You can see the model code at ./models/spiking_mutable_eb.py
 
