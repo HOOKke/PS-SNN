@@ -5,7 +5,7 @@ This repository contains code supporting the manuscript **“PS-SNN: Pattern Sep
 ![image](https://github.com/HOOKke/PS-SNN/tree/main/images)
 
 ## Data
-Our experiments relies on the natural image dataset CIFAR100(https://www.cs.toronto.edu/~kriz/cifar.html).
+Our experiments relies on the natural image dataset CIFAR100 (https://www.cs.toronto.edu/~kriz/cifar.html).
 
 ## Running experiments
 
