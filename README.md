@@ -23,17 +23,17 @@ You can see the model code at ./models/spiking_mutable_eb.py
 # CIFAR100-B0-5steps
 python main_exp.py --options options/data/cifar100_3orders.yaml options/spiking_eb/spikng_allcomponents_cifar100_B0.yaml \
                 --initial-increment 0 --increment 20
-                --device <GPU_IDS> --label alade_snn_cifar100_b0_5steps
+                --device <GPU_IDS> --label ps_snn_cifar100_b0_5steps
 
 # CIFAR100-B0-10steps
 python main_exp.py --options options/data/cifar100_3orders.yaml options/spiking_eb/spikng_allcomponents_cifar100_B0.yaml \
                 --initial-increment 0 --increment 10
-                --device <GPU_IDS> --label alade_snn_cifar100_b0_10steps
+                --device <GPU_IDS> --label ps_snn_cifar100_b0_10steps
 
 # CIFAR100-B50-5steps
 python main_exp.py --options options/data/cifar100_3orders.yaml options/spiking_eb/spikng_allcomponents_cifar100_B50.yaml \
                 --initial-increment 50 --increment 10
-                --device <GPU_IDS> --label alade_snn_cifar100_b50_5steps
+                --device <GPU_IDS> --label ps_snn_cifar100_b50_5steps
 # or you can also aggregate all the options into one yaml file as options/spiking_eb/spiking_allcomponents_cifar100_inc20b0.yaml
 
 # DVS-CIFAR100-B0-2steps
@@ -47,7 +47,7 @@ python main_exp.py --options options/spiking_eb/spikng_allcomponents_tinyImageNe
 
 python main_exp.py --options options/data/imagenet100_1order.yaml options/spiking_eb/spikng_allcomponents_tinyImageNet_B0.yaml \
                 --initial-increment 0 --increment 10
-                --device <GPU_IDS> --label alade_snn_imagenet100_b0_10steps
+                --device <GPU_IDS> --label ps_snn_imagenet100_b0_10steps
 
 ```
 
