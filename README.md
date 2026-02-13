@@ -30,24 +30,22 @@ python main_exp.py --options options/data/cifar100_3orders.yaml options/spiking_
                 --initial-increment 0 --increment 10
                 --device <GPU_IDS> --label ps_snn_cifar100_b0_10steps
 
+# CIFAR100-B0-20steps
+python main_exp.py --options options/data/cifar100_3orders.yaml options/spiking_eb/spikng_allcomponents_cifar100_B0.yaml \
+                --initial-increment 0 --increment 5
+                --device <GPU_IDS> --label ps_snn_cifar100_b0_20steps
+
 # CIFAR100-B50-5steps
 python main_exp.py --options options/data/cifar100_3orders.yaml options/spiking_eb/spikng_allcomponents_cifar100_B50.yaml \
                 --initial-increment 50 --increment 10
                 --device <GPU_IDS> --label ps_snn_cifar100_b50_5steps
+
+# CIFAR100-B50-10steps
+python main_exp.py --options options/data/cifar100_3orders.yaml options/spiking_eb/spikng_allcomponents_cifar100_B50.yaml \
+                --initial-increment 50 --increment 5
+                --device <GPU_IDS> --label ps_snn_cifar100_b50_5steps
 # or you can also aggregate all the options into one yaml file as options/spiking_eb/spiking_allcomponents_cifar100_inc20b0.yaml
 
-# DVS-CIFAR100-B0-2steps
-python main_exp.py --options options/spiking_eb/spikng_allcomponents_dvscifar10_inc5b0.yaml \
-                --device <GPU_IDS>
-  
-# The options below has not been best fine-tuned though, a large time-window shall perform better
-# TINYIMAGENET-B0-10steps
-python main_exp.py --options options/spiking_eb/spikng_allcomponents_tinyImageNet_B0.yaml \
-                --device <GPU_IDS>
-
-python main_exp.py --options options/data/imagenet100_1order.yaml options/spiking_eb/spikng_allcomponents_tinyImageNet_B0.yaml \
-                --initial-increment 0 --increment 10
-                --device <GPU_IDS> --label ps_snn_imagenet100_b0_10steps
 
 ```
 
